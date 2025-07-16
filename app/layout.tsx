@@ -1,4 +1,4 @@
-import Footer from "./_components/Layout/Navbar/Footer/Footer";
+import Footer from "./_components/Layout/Footer/Footer";
 import Navbar from "./_components/Layout/Navbar/Navbar";
 import "./globals.css";
 
