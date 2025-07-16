@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <>
       <Banner />
-      <nav className="w-full bg-white/70 shadow-sm relative z-50">
+      <nav className="fixed top-11 w-full bg-white/70 shadow-sm  z-0">
         <div className="mx-auto max-w-10/12 flex items-center justify-between p-4">
           <div className="flex items-center">
             <Link href="/">

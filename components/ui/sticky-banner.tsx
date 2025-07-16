@@ -53,7 +53,7 @@ export const StickyBanner: React.FC<StickyBannerProps> = ({
   return (
     <motion.div
       className={cn(
-        "sticky inset-x-0 top-0 z-40 flex min-h-11 w-full items-center justify-center bg-blue-500 px-4 py-1 text-white",
+        "fixed inset-x-0 top-0 z-50 flex min-h-11 w-full items-center justify-center bg-blue-500 px-4 py-1 text-white",
         className
       )}
       initial={{ y: -100, opacity: 0 }}
@@ -76,16 +76,21 @@ export const StickyBanner: React.FC<StickyBannerProps> = ({
   );
 };
 
-export const Navbar: React.FC = () => {
-  return (
-    <div className="flex flex-col">
-      <StickyBanner hideOnScroll>
-        <span>This is a sticky banner!</span>
-      </StickyBanner>
-
-      <nav className="bg-gray-800 text-white p-4">
-        <div className="max-w-10/12 mx-auto">Navbar</div>
-      </nav>
+// Sample fixed Navbar component to use below StickyBanner
+export const FixedNavbar: React.FC = () => (
+  <nav className="fixed top-11 left-0 w-full z-40 bg-gray-800 text-white p-4 flex items-center justify-between">
+    <div className="max-w-8xl mx-auto w-full flex items-center justify-between">
+      <span>Logo</span>
+      <div className="flex space-x-4">
+        <a href="#" className="text-white">Products</a>
+        <a href="#" className="text-white">Solutions</a>
+        <a href="#" className="text-white">Partners</a>
+        <a href="#" className="text-white">Contact</a>
+        <a href="#" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">See a demo</a>
+      </div>
     </div>
-  );
-};
+  </nav>
+);
+
+// Usage note:
+// Place <StickyBanner> at the top, <FixedNavbar> below it, and add <div className="pt-28"> to your main content.

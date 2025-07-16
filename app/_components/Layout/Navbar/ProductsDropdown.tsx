@@ -1,11 +1,49 @@
 "use client";
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import DropdownLink from './DropdownLink';
 import ProductsItem from './ProductsItem';
 import { MoveRight } from 'lucide-react';
 
 const ProductsDropdown: React.FC = () => {
-    const isOpen = true;
+    const [isOpen, setIsOpen] = useState(false);
+    const closeTimeout = useRef<NodeJS.Timeout | null>(null);
+
+    const dropdownRef = useRef<HTMLDivElement>(null);
+    const triggerRef = useRef<HTMLDivElement>(null);
+
+    const handleMouseEnter = () => {
+        if (closeTimeout.current) {
+            clearTimeout(closeTimeout.current);
+            closeTimeout.current = null;
+        }
+        setIsOpen(true);
+    };
+
+    const handleMouseLeave = () => {
+        closeTimeout.current = setTimeout(() => {
+            setIsOpen(false);
+        }, 1500);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            const target = event.target as Node;
+            if (
+                isOpen &&
+                dropdownRef.current &&
+                triggerRef.current &&
+                !dropdownRef.current.contains(target) &&
+                !triggerRef.current.contains(target)
+            ) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isOpen]);
 
     const SectionHeader = ({ title }: { title: string }) => (
         <div className="flex items-center justify-between my-4">
@@ -14,10 +52,9 @@ const ProductsDropdown: React.FC = () => {
                 View All
                 <MoveRight
                     width={15}
-                    className=" transition-transform duration-200 ease-in-out group-hover:translate-x-1"
+                    className="transition-transform duration-200 ease-in-out group-hover:translate-x-1"
                 />
             </a>
-
         </div>
     );
 
@@ -25,18 +62,31 @@ const ProductsDropdown: React.FC = () => {
 
     return (
         <div className="relative">
-            <DropdownLink label="Products" hasDropdown />
+            <div
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                ref={triggerRef}
+                style={{ display: 'inline-block' }}
+            >
+                <DropdownLink label="Products" hasDropdown />
+            </div>
 
             {isOpen && (
                 <>
                     <div
                         className="fixed inset-0 z-40 pointer-events-none"
-                        style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}
-                    ></div>
+                        style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}
+                    />
 
-                    <div className="fixed top-[130px] h-96 left-0 w-screen bg-white shadow-lg rounded p-4 z-50 overflow-y-auto">
+
+                    <div
+                        ref={dropdownRef}
+                        className="fixed top-[130px] h-96 left-0 w-screen bg-white shadow-lg rounded p-4 z-50 overflow-y-auto"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
                         <div className="mx-auto max-w-10/12 grid grid-cols-4 gap-8">
-                            {/* Products */}
+
                             <div className="col-span-1">
                                 <SectionHeader title="Products" />
                                 <Divider />
@@ -69,7 +119,6 @@ const ProductsDropdown: React.FC = () => {
                                 />
                             </div>
 
-                            {/* Connect with Bankbooker */}
                             <div className="col-span-1">
                                 <SectionHeader title="Connect with Bankbooker" />
                                 <Divider />
@@ -101,7 +150,6 @@ const ProductsDropdown: React.FC = () => {
                                 />
                             </div>
 
-                            {/* Resource Center */}
                             <div className="col-span-1">
                                 <SectionHeader title="Resource Center" />
                                 <Divider />
@@ -131,15 +179,11 @@ const ProductsDropdown: React.FC = () => {
                                 />
                             </div>
 
-
-                            <div className="col-span-1 bg-gray-100 h-full rounded-lg py-0 px-2 f">
+                            <div className="col-span-1 bg-gray-100 h-full rounded-lg py-0 px-2">
                                 <div className="flex justify-center mb-2 mt-4">
                                     <div className="text-lg font-medium text-center">Best Offer</div>
                                 </div>
-
-
                             </div>
-
                         </div>
                     </div>
                 </>
