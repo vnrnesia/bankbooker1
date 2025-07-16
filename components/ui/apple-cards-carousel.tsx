@@ -6,6 +6,7 @@ import React, {
   useState,
   createContext,
 } from "react";
+import type { JSX } from "react";
 import {
   IconArrowNarrowLeft,
   IconArrowNarrowRight,
