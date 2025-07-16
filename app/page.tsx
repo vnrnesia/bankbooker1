@@ -1,6 +1,7 @@
 import Brands from "./_components/Brands";
 import HeroSection from "./_components/HeroSection";
 import Services from "./_components/Services";
+import VisionMision from "./_components/VisionMision";
 
 export default function Home() {
   return (
@@ -8,6 +9,8 @@ export default function Home() {
     <HeroSection/>
     <Brands/>
     <Services/>
+    <VisionMision/>
+    
     </>
   );
 }
