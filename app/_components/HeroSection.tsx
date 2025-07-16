@@ -10,7 +10,7 @@ const HeroSection = () => {
 
     return (
         <div className="w-full min-h-screen bg-white">
-            <div className="max-w-10/12 mx-auto pt-36 px-4">
+            <div className="max-w-10/12 mx-auto pt-36  px-4">
                 <nav className="md:pt-0">
                     <div className="flex justify-end items-center py-4">
 

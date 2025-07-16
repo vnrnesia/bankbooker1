@@ -33,7 +33,7 @@ const serviceItems = [
 
 const Services = () => {
     return (
-        <div className="container mx-auto px-4 max-w-10/12 py-20 pb-32 font-[Manrope]">
+        <div className="container mx-auto max-w-10/12 py-20 pt-52 pb-36 font-[Manrope]">
             {/* Header */}
             <div className="flex flex-col md:flex-row justify-between items-center mb-12">
                 <div>

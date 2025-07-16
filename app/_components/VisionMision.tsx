@@ -65,7 +65,7 @@ const VisionMision = () => {
     };
 
     return (
-        <section className="max-w-10/12 mx-auto py-10 grid grid-cols-1 lg:grid-cols-2 gap-10 font-[Manrope]">
+        <section className="max-w-10/12 mx-auto pt-16 pb-36 grid grid-cols-1 lg:grid-cols-2 gap-10 font-[Manrope]">
             {/* Sol Sütun: Görsel + Accordion */}
             <div className="space-y-6 order-1">
                 <div
