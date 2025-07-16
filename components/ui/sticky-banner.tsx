@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { cn } from "../../lib/utils";
 
 const CloseIcon = (props: React.SVGProps<SVGSVGElement>) => (

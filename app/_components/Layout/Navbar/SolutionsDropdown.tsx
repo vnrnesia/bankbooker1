@@ -68,14 +68,14 @@ const ProductsDropdown: React.FC = () => {
                 ref={triggerRef}
                 style={{ display: 'inline-block' }}
             >
-                <DropdownLink label="Products" hasDropdown />
+                <DropdownLink label="Solutions" hasDropdown />
             </div>
 
             {isOpen && (
                 <>
                     <div
                         className="fixed inset-0 z-40 pointer-events-none"
-                        style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}
+                       
                     />
 
 

@@ -5,7 +5,6 @@ import React, {
   useRef,
   useState,
   createContext,
-  useContext,
 } from "react";
 import {
   IconArrowNarrowLeft,
@@ -168,11 +167,9 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 export const Card = ({
   card,
   index,
-  layout = false,
 }: {
   card: Card;
   index: number;
-  layout?: boolean;
 }) => {
   return (
     <div className="relative z-10 flex h-80 w-56 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 md:h-[40rem] md:w-96 dark:bg-neutral-900">
@@ -196,8 +193,6 @@ export const Card = ({
 };
 
 export const BlurImage = ({
-  height,
-  width,
   src,
   className,
   alt,

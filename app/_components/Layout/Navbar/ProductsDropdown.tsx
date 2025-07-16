@@ -77,7 +77,7 @@ const ProductsDropdown: React.FC = () => {
         <>
           {/* BACKDROP */}
           <div
-            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-30 pointer-events-auto"
+            className="fixed inset-0 b z-30 pointer-events-auto"
             aria-hidden="true"
           />
 

@@ -11,7 +11,7 @@ export function AppleCardsCarouselDemo() {
     return (
         <div className="w-full h-full py-20">
             <h2 className="max-w-10/12 mx-auto text-xl md:text-5xl font-bold text-black  font-[Manrope]">
-                Don't just take our word for it.
+                Don&apos;t just take our word for it.
                 Over 1.000+ influcer chose Banbooker
             </h2>
             <Carousel items={cards} />
