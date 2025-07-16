@@ -1,4 +1,5 @@
-import Navbar from "./_components/Layout.tsx/Navbar/Navbar";
+import Footer from "./_components/Layout/Navbar/Footer/Footer";
+import Navbar from "./_components/Layout/Navbar/Navbar";
 import "./globals.css";
 
 import { Manrope } from 'next/font/google';
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body className="font-sans">
         <Navbar />
         {children}
+        <Footer/>
       </body>
     </html>
   );

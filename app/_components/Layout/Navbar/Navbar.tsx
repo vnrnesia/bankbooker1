@@ -1,24 +1,36 @@
-"use client"
+// Navbar.tsx
+'use client';
 import React from 'react';
 import { Banner } from './Banner';
 import Image from 'next/image';
-import DropdownLink from './DropdownLink'; // yukarıdaki component
+import ProductsDropdown from './ProductsDropdown';
+import SolutionsDropdown from './SolutionsDropdown';
+import Link from 'next/link';
 
 const Navbar = () => {
   return (
     <>
       <Banner />
-      <nav className="w-full bg-white/70 shadow-sm">
+      <nav className="w-full bg-white/70 shadow-sm relative z-50">
         <div className="mx-auto max-w-10/12 flex items-center justify-between p-4">
           <div className="flex items-center">
-            <Image src="/bankbooker.png" alt="BankBooker Logo" width={200} height={50} />
+            <Link href="/">
+              <Image src="/bankbooker.png" alt="BankBooker Logo" width={200} height={50} />
+            </Link>
           </div>
+
           <div className="flex space-x-5">
-            <DropdownLink label="Products" hasDropdown />
-            <DropdownLink label="Solutions" hasDropdown />
-            <DropdownLink label="Partners" />
-            <DropdownLink label="Contact" />
+            <ProductsDropdown />
+            <SolutionsDropdown />
+
+            <Link href="/partner" className="text-black font-medium ">
+              Partners
+            </Link>
+            <Link href="/contact" className="text-black font-medium ">
+              Contact
+            </Link>
           </div>
+
           <div className="flex space-x-4">
             <a href="#" className="text-black my-auto font-medium">Sign In</a>
             <a
