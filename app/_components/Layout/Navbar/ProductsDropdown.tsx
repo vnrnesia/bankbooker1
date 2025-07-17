@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ProductsItem from "./ProductsItem";
@@ -20,6 +21,7 @@ const ProductsDropdown: React.FC<ProductsDropdownProps> = ({ bannerOpen }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
+  // Mouse menüye girince kapanmayı engelle
   const handleMouseEnter = () => {
     if (closeTimeout.current) {
       clearTimeout(closeTimeout.current);
@@ -28,12 +30,14 @@ const ProductsDropdown: React.FC<ProductsDropdownProps> = ({ bannerOpen }) => {
     setIsOpen(true);
   };
 
+  // Mouse menüden çıkınca kapanma tetikle
   const handleMouseLeave = () => {
     closeTimeout.current = setTimeout(() => {
       setIsOpen(false);
-    }, 500);
+    }, 0); // Hemen kapanması için 0 ms, istersen biraz artırabilirsin
   };
 
+  // Menü dışına tıklayınca menüyü kapat
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
@@ -52,6 +56,7 @@ const ProductsDropdown: React.FC<ProductsDropdownProps> = ({ bannerOpen }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
+  // Başlık bölümü için küçük helper component
   const SectionHeader = ({ title }: { title: string }) => (
     <div className="flex items-center justify-between my-4">
       <span className="text-lg font-medium">{title}</span>
@@ -95,10 +100,10 @@ const ProductsDropdown: React.FC<ProductsDropdownProps> = ({ bannerOpen }) => {
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop for outside click capture */}
+            {/* Backdrop to capture outside clicks */}
             <div className="fixed inset-0 z-30" aria-hidden="true" />
 
-            {/* Dropdown menu with animation */}
+            {/* Dropdown menü animasyonlu */}
             <motion.div
               ref={dropdownRef}
               className={`fixed left-0 w-screen ${
@@ -118,31 +123,35 @@ const ProductsDropdown: React.FC<ProductsDropdownProps> = ({ bannerOpen }) => {
                 <div className="col-span-1">
                   <SectionHeader title="Products" />
                   <Divider />
-                  {[{
-                    href: "/products/invoice",
-                    imageSrc: "/productsdropdown/invoice.png",
-                    title: "Invoice Payment",
-                    description: "Pay vendors faster and safer",
-                    imageWidth: 30,
-                    imageHeight: 30,
-                    imageClassName: "object-contain mr-1"
-                  },{
-                    href: "/products/banking",
-                    imageSrc: "/productsdropdown/banking.png",
-                    title: "Banking Product",
-                    description: "Bank smarter with up to 4.36%",
-                    imageWidth: 30,
-                    imageHeight: 36,
-                    imageClassName: "object-contain"
-                  },{
-                    href: "/products/accounting",
-                    imageSrc: "/productsdropdown/invoice.png",
-                    title: "Accounting Outsourcing",
-                    description: "Simplify close and earn rewards",
-                    imageWidth: 30,
-                    imageHeight: 28,
-                    imageClassName: "object-contain mr-1"
-                  }].map((item, i) => (
+                  {[
+                    {
+                      href: "/products/invoice",
+                      imageSrc: "/productsdropdown/invoice.png",
+                      title: "Invoice Payment",
+                      description: "Pay vendors faster and safer",
+                      imageWidth: 30,
+                      imageHeight: 30,
+                      imageClassName: "object-contain mr-1",
+                    },
+                    {
+                      href: "/products/banking",
+                      imageSrc: "/productsdropdown/banking.png",
+                      title: "Banking Product",
+                      description: "Bank smarter with up to 4.36%",
+                      imageWidth: 30,
+                      imageHeight: 36,
+                      imageClassName: "object-contain",
+                    },
+                    {
+                      href: "/products/accounting",
+                      imageSrc: "/productsdropdown/invoice.png",
+                      title: "Accounting Outsourcing",
+                      description: "Simplify close and earn rewards",
+                      imageWidth: 30,
+                      imageHeight: 28,
+                      imageClassName: "object-contain mr-1",
+                    },
+                  ].map((item, i) => (
                     <div
                       key={i}
                       className="transition-all duration-300 hover:scale-[1.03] hover:-translate-y-[2px] ease-in-out"
@@ -156,30 +165,34 @@ const ProductsDropdown: React.FC<ProductsDropdownProps> = ({ bannerOpen }) => {
                 <div className="col-span-1">
                   <SectionHeader title="Connect with Bankbooker" />
                   <Divider />
-                  {[{
-                    href: "/contact/agent",
-                    imageSrc: "/productsdropdown/talk.png",
-                    title: "Talk with agent",
-                    description: "Get free consultancy",
-                    imageWidth: 30,
-                    imageHeight: 30,
-                    imageClassName: "object-contain"
-                  },{
-                    href: "/contact/chat",
-                    imageSrc: "/productsdropdown/chat.png",
-                    title: "Chat with us",
-                    description: "Connect with support team",
-                    imageWidth: 30,
-                    imageHeight: 30
-                  },{
-                    href: "/contact/telegram",
-                    imageSrc: "/productsdropdown/telegram.png",
-                    title: "Telegram Community",
-                    description: "Benefit from privileges",
-                    imageWidth: 30,
-                    imageHeight: 30,
-                    imageClassName: "mr-1"
-                  }].map((item, i) => (
+                  {[
+                    {
+                      href: "/contact/agent",
+                      imageSrc: "/productsdropdown/talk.png",
+                      title: "Talk with agent",
+                      description: "Get free consultancy",
+                      imageWidth: 30,
+                      imageHeight: 30,
+                      imageClassName: "object-contain",
+                    },
+                    {
+                      href: "/contact/chat",
+                      imageSrc: "/productsdropdown/chat.png",
+                      title: "Chat with us",
+                      description: "Connect with support team",
+                      imageWidth: 30,
+                      imageHeight: 30,
+                    },
+                    {
+                      href: "/contact/telegram",
+                      imageSrc: "/productsdropdown/telegram.png",
+                      title: "Telegram Community",
+                      description: "Benefit from privileges",
+                      imageWidth: 30,
+                      imageHeight: 30,
+                      imageClassName: "mr-1",
+                    },
+                  ].map((item, i) => (
                     <div
                       key={i}
                       className="transition-all duration-300 hover:scale-[1.03] hover:-translate-y-[2px] ease-in-out"
@@ -193,28 +206,32 @@ const ProductsDropdown: React.FC<ProductsDropdownProps> = ({ bannerOpen }) => {
                 <div className="col-span-1">
                   <SectionHeader title="Resource Center" />
                   <Divider />
-                  {[{
-                    href: "/resources/blog",
-                    imageSrc: "/productsdropdown/blog.png",
-                    title: "Blog",
-                    description: "Get news and insights",
-                    imageWidth: 30,
-                    imageHeight: 30
-                  },{
-                    href: "/resources/reports",
-                    imageSrc: "/productsdropdown/report.png",
-                    title: "Exclusive reports",
-                    description: "Unlock research and guides",
-                    imageWidth: 30,
-                    imageHeight: 30
-                  },{
-                    href: "/resources/customers",
-                    imageSrc: "/productsdropdown/customer.png",
-                    title: "Customer stories",
-                    description: "Learn from the best",
-                    imageWidth: 30,
-                    imageHeight: 30
-                  }].map((item, i) => (
+                  {[
+                    {
+                      href: "/resources/blog",
+                      imageSrc: "/productsdropdown/blog.png",
+                      title: "Blog",
+                      description: "Get news and insights",
+                      imageWidth: 30,
+                      imageHeight: 30,
+                    },
+                    {
+                      href: "/resources/reports",
+                      imageSrc: "/productsdropdown/report.png",
+                      title: "Exclusive reports",
+                      description: "Unlock research and guides",
+                      imageWidth: 30,
+                      imageHeight: 30,
+                    },
+                    {
+                      href: "/resources/customers",
+                      imageSrc: "/productsdropdown/customer.png",
+                      title: "Customer stories",
+                      description: "Learn from the best",
+                      imageWidth: 30,
+                      imageHeight: 30,
+                    },
+                  ].map((item, i) => (
                     <div
                       key={i}
                       className="transition-all duration-300 hover:scale-[1.03] hover:-translate-y-[2px] ease-in-out"
@@ -227,8 +244,11 @@ const ProductsDropdown: React.FC<ProductsDropdownProps> = ({ bannerOpen }) => {
                 {/* Best Offer Column */}
                 <div className="col-span-1 bg-gray-100 h-full rounded-lg py-0 px-2">
                   <div className="flex justify-center mb-2 mt-4">
-                    <div className="text-lg font-medium text-center">Best Offer</div>
+                    <div className="text-lg font-medium text-center">
+                      Best Offer
+                    </div>
                   </div>
+                  {/* İstersen burada best offer içeriği ekle */}
                 </div>
               </div>
             </motion.div>
