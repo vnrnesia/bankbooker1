@@ -248,7 +248,6 @@ const ProductsDropdown: React.FC<ProductsDropdownProps> = ({ bannerOpen }) => {
                       Best Offer
                     </div>
                   </div>
-                  {/* İstersen burada best offer içeriği ekle */}
                 </div>
               </div>
             </motion.div>

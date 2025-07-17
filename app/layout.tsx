@@ -1,3 +1,4 @@
+import Chatbot from "./_components/Layout/Chatbot/Chatbot";
 import Footer from "./_components/Layout/Footer/Footer";
 import Navbar from "./_components/Layout/Navbar/Navbar";
 import "./globals.css";
@@ -21,6 +22,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer/>
+        <Chatbot/>
       </body>
     </html>
   );

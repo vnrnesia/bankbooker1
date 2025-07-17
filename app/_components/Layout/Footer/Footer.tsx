@@ -86,7 +86,7 @@ const Footer = () => {
       {/* Main Footer Area */}
       <footer className="w-full min-h-[610px] bg-gray-100 text-gray-800 font-manrope overflow-hidden">
         <div className="w-full">
-          <div className="max-w-10/12 mx-auto px-4 sm:px-6 lg:px-8 pb-8 md:pb-12">
+          <div className="max-w-10/12 mx-auto  pb-8 md:pb-12">
             <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-12">
               {/* Left Area */}
               <div className="footer-left max-w-xl py-8 md:py-24">
