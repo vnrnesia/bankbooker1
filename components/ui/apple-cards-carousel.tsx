@@ -126,6 +126,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
           <div className="flex flex-row justify-start gap-4 pl-4 mx-auto max-w-7xl">
             {items.map((item, index) => (
               <motion.div
+                key={`card-${index}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{
                   opacity: 1,
@@ -136,8 +137,8 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
                     ease: "easeOut",
                   } as Transition,
                 }}
-                key={`card-${index}`}
                 className="rounded-3xl last:pr-[5%] md:last:pr-[33%]"
+                onDragStart={(e) => e.preventDefault()} // 👈 Kartta sürüklemeyi tamamen engeller
               >
                 {item}
               </motion.div>
@@ -173,7 +174,10 @@ export const Card = ({
   index: number;
 }) => {
   return (
-    <div className="relative z-10 flex h-80 w-56 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 md:h-[40rem] md:w-96 dark:bg-neutral-900">
+    <div
+      className="relative z-10 flex h-80 w-56 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 md:h-[40rem] md:w-96 dark:bg-neutral-900 select-none"
+      onDragStart={(e) => e.preventDefault()} // 👈 Kart bileşeni genelinde sürükleme engeli
+    >
       <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-full bg-gradient-to-b from-black/50 via-transparent to-transparent" />
       <div className="relative z-40 p-8">
         <p className="text-left font-sans text-sm font-medium text-white md:text-base">
@@ -202,6 +206,7 @@ export const BlurImage = ({
   const [isLoading, setLoading] = useState(true);
   return (
     <Image
+      draggable={false} // 👈 Resmin sürüklenmesini engeller
       className={cn(
         "h-full w-full transition duration-300",
         isLoading ? "blur-sm" : "blur-0",

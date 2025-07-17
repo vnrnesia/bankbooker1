@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
+import { NumberTicker } from "@/components/magicui/number-ticker";
 
 export function AppleCardsCarouselDemo() {
     const cards = data.map((card, index) => (
@@ -10,9 +11,9 @@ export function AppleCardsCarouselDemo() {
 
     return (
         <div className="w-full h-full py-20">
-            <h2 className="max-w-10/12 mx-auto text-xl md:text-5xl font-bold text-black  font-[Manrope]">
+            <h2 className="max-w-10/12 mx-auto text-xl md:text-5xl font-semibold text-black  font-[Manrope]">
                 Don&apos;t just take our word for it.
-                Over 1.000+ influcer chose Banbooker
+                Over <NumberTicker value={1000}/>+ influcer chose Banbooker
             </h2>
             <Carousel items={cards} />
         </div>

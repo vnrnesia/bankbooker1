@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { NumberTicker } from "@/components/magicui/number-ticker";
+
 
 type AccordionItemProps = {
     title: string;
@@ -109,21 +111,21 @@ const VisionMision = () => {
                     outcomes.
                 </p>
 
-                <button className="hidden lg:block bg-gradient-to-b from-[#0FA9E9] to-[#0786E2] hover:bg-blue-700 text-white font-medium px-9 py-3 rounded-lg">
+                <button className="hidden lg:block bg-gradient-to-b from-[#0FA9E9] to-[#0786E2] hover:bg-blue-700 hover:scale-105 transition duration-300 text-white font-medium px-9 py-3 md:mb-22 rounded-lg">
                     Discover More
                 </button>
 
                 <div className="mt-10 grid grid-cols-3 divide-x divide-gray-200 text-center">
                     <div>
-                        <p className="text-2xl md:text-4xl font-semibold text-neutral-900">24+</p>
+                        <p className="text-2xl md:text-4xl font-semibold text-neutral-900"><NumberTicker value={24}/>+</p>
                         <p className="text-md text-gray-500 mt-1">Years of collective experience</p>
                     </div>
                     <div className="px-4">
-                        <p className="text-2xl md:text-4xl font-semibold text-neutral-900">95%</p>
+                        <p className="text-2xl md:text-4xl font-semibold text-neutral-900"><NumberTicker value={95}/>%</p>
                         <p className="text-md text-gray-500 mt-1">Remarkable client satisfaction rate</p>
                     </div>
                     <div>
-                        <p className="text-2xl md:text-4xl font-semibold text-neutral-900">500+</p>
+                        <p className="text-2xl md:text-4xl font-semibold text-neutral-900"><NumberTicker value={500}/>+</p>
                         <p className="text-md text-gray-500 mt-1">Successfully created projects</p>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { NumberTicker } from "@/components/magicui/number-ticker";
 
 const icons = [
     { src: "brand1.png", width: "w-[80%] md:w-[60%]" },
@@ -22,7 +23,7 @@ const Brands = () => {
                 <div>
                     <h2 className="text-3xl font-bold text-gray-900">Partner</h2>
                     <h3 className="text-4xl font-bold text-gray-900 mt-2">
-                        Trusted By 550+ Companies Worldwide                    </h3>
+                        Trusted By +<NumberTicker value={550} className="text-4xl font-bold text-gray-900 mt-2"/> Companies Worldwide                    </h3>
                 </div>
                 <p className="text-gray-500 text-sm md:text-base mt-4 md:mt-0 max-w-md">
                     Here are some of the companies that have been empowered by Bankbooker to move forward with confidence.

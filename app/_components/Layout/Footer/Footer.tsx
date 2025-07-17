@@ -14,7 +14,6 @@ const Footer = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Scroll to top button visibility
     const toggleVisibility = () => {
       const scrollPosition = window.scrollY + window.innerHeight;
       const pageHeight = document.documentElement.scrollHeight;
@@ -24,69 +23,46 @@ const Footer = () => {
 
     window.addEventListener("scroll", toggleVisibility);
 
-    // GSAP animations for parallax reveal effect from bottom
-    // Left Area (Logo, Title, Button)
-    gsap.fromTo(
-      ".footer-left",
-      { opacity: 0, y: 150 }, // Start below footer, fully hidden
-      {
-        opacity: 1,
-        y: 0, // Slide to original position
-        duration: 1.2,
-        scrollTrigger: {
-          trigger: "footer",
-          start: "top bottom", // Start when top of footer hits bottom of viewport
-          end: "top 70%", // End when top of footer is 70% up the viewport
-          scrub: 1,
-        },
-      }
-    );
+    // Footer içeriği yukarıdan içeri kayarak görünür olacak (lineer geçiş)
+    // Yukarıdan aşağı kayan içerik (gizli başlayıp footer'ın içine akar)
+    const animateFromTop = (target: string, fromY: number) => {
+      gsap.fromTo(
+        target,
+        { opacity: 0, y: fromY },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: "power1.out",
+          scrollTrigger: {
+            trigger: "footer",
+            start: "top bottom",
+            end: "top 50%",
+            scrub: 1,
+          },
+        }
+      );
+    };
 
-    // Right Area (Contact Info)
-    gsap.fromTo(
-      ".footer-right",
-      { opacity: 0, y: 150 }, // Start below footer, fully hidden
-      {
-        opacity: 1,
-        y: 0, // Slide to original position
-        duration: 1.2,
-        scrollTrigger: {
-          trigger: "footer",
-          start: "top bottom",
-          end: "top 70%",
-          scrub: 1,
-        },
-      }
-    );
 
-    // Menu Area Links
+
+    animateFromTop(".footer-left", -300);
+    animateFromTop(".footer-right", 300);
+    animateFromTop(".footer-bottom", -300);
+
+
+    // Menü linkleri: biraz daha küçük kaydırma, yine lineer
     gsap.fromTo(
       ".footer-menu a",
-      { opacity: 0, y: 100 }, // Start below menu area, fully hidden
+      { opacity: 0, y: -50 },
       {
         opacity: 1,
-        y: 0, // Slide to original position
+        y: 0,
         duration: 0.8,
+        ease: "none",
         stagger: 0.1,
         scrollTrigger: {
           trigger: ".footer-menu",
-          start: "top bottom",
-          end: "top 80%",
-          scrub: 1,
-        },
-      }
-    );
-
-    // Bottom Info and Social Media
-    gsap.fromTo(
-      ".footer-bottom",
-      { opacity: 0, y: 100 }, // Start below bottom area, fully hidden
-      {
-        opacity: 1,
-        y: 0, // Slide to original position
-        duration: 1,
-        scrollTrigger: {
-          trigger: ".footer-bottom",
           start: "top bottom",
           end: "top 80%",
           scrub: 1,
@@ -100,6 +76,7 @@ const Footer = () => {
     };
   }, []);
 
+  3
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -107,12 +84,12 @@ const Footer = () => {
   return (
     <>
       {/* Main Footer Area */}
-      <footer className="w-full min-h-[550px] bg-gray-100 text-gray-800 font-manrope overflow-hidden">
+      <footer className="w-full min-h-[610px] bg-gray-100 text-gray-800 font-manrope overflow-hidden">
         <div className="w-full">
           <div className="max-w-10/12 mx-auto px-4 sm:px-6 lg:px-8 pb-8 md:pb-12">
             <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-12">
               {/* Left Area */}
-              <div className="footer-left max-w-xl py-8 md:py-1">
+              <div className="footer-left max-w-xl py-8 md:py-24">
                 <div className="flex items-center gap-2 mb-4">
                   <Link href="/" className="flex items-center gap-2 mb-4">
                     <Image
@@ -138,7 +115,7 @@ const Footer = () => {
               </div>
 
               {/* Right Area */}
-              <div className="footer-right grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-16 text-sm pt-8 md:pt-36 text-gray-600">
+              <div className="footer-right grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-16 text-sm pt-8 md:pt-48 text-gray-600">
                 <div className="space-y-4">
                   <h4 className="text-base font-semibold text-gray-800 tracking-wide mb-4">
                     CONTACT US
