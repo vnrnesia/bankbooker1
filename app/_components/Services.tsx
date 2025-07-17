@@ -75,8 +75,8 @@ const Services = () => {
         </div>
 
         {/* 3rd item centered */}
-        <div className="mt-4 md:mt-0 md:col-span-1">
-          <div className="bg-gray-100 p-4 rounded-lg shadow-md flex flex-col justify-between transition-transform duration-300 hover:scale-105 min-h-[300px]">
+        <div className="mt-4  md:mt-0 md:col-span-1">
+          <div className="bg-gray-100 p-4 rounded-lg shadow-md flex flex-col justify-between transition-transform duration-300 hover:scale-105 md:min-h-[400px]">
             <div className="flex flex-col gap-2">
               <h4 className="text-xl font-semibold text-gray-900">{serviceItems[2].title}</h4>
               <p className="text-[#8E8E8E] text-base">{serviceItems[2].description}</p>
