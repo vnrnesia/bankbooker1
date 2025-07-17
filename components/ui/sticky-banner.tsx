@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, useScroll } from "framer-motion";
 import { cn } from "../../lib/utils";
 
@@ -27,28 +27,26 @@ interface StickyBannerProps {
   className?: string;
   children: React.ReactNode;
   hideOnScroll?: boolean;
+  onClose?: () => void;
 }
 
 export const StickyBanner: React.FC<StickyBannerProps> = ({
   className,
   children,
   hideOnScroll = false,
+  onClose,
 }) => {
   const [open, setOpen] = useState(true);
   const { scrollY } = useScroll();
 
-  React.useEffect(() => {
-    if (!hideOnScroll) return;
 
-    const unsubscribe = scrollY.on("change", (latest) => {
-      if (latest > 40 && open) setOpen(false);
-      else if (latest <= 40 && !open) setOpen(true);
-    });
-
-    return () => unsubscribe();
-  }, [hideOnScroll, scrollY, open]);
 
   if (!open) return null;
+
+  const handleCloseClick = () => {
+    setOpen(false);
+    if (onClose) onClose();
+  };
 
   return (
     <motion.div
@@ -67,7 +65,7 @@ export const StickyBanner: React.FC<StickyBannerProps> = ({
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer"
-        onClick={() => setOpen(false)}
+        onClick={handleCloseClick}
         aria-label="Close banner"
       >
         <CloseIcon className="h-5 w-5 text-white" />
@@ -75,22 +73,3 @@ export const StickyBanner: React.FC<StickyBannerProps> = ({
     </motion.div>
   );
 };
-
-// Sample fixed Navbar component to use below StickyBanner
-export const FixedNavbar: React.FC = () => (
-  <nav className="fixed top-11 left-0 w-full z-40 bg-gray-800 text-white p-4 flex items-center justify-between">
-    <div className="max-w-8xl mx-auto w-full flex items-center justify-between">
-      <span>Logo</span>
-      <div className="flex space-x-4">
-        <a href="#" className="text-white">Products</a>
-        <a href="#" className="text-white">Solutions</a>
-        <a href="#" className="text-white">Partners</a>
-        <a href="#" className="text-white">Contact</a>
-        <a href="#" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">See a demo</a>
-      </div>
-    </div>
-  </nav>
-);
-
-// Usage note:
-// Place <StickyBanner> at the top, <FixedNavbar> below it, and add <div className="pt-28"> to your main content.
