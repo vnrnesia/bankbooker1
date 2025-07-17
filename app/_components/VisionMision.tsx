@@ -111,7 +111,7 @@ const VisionMision = () => {
                     outcomes.
                 </p>
 
-                <button className="hidden lg:block bg-gradient-to-b from-[#0FA9E9] to-[#0786E2] hover:bg-blue-700 hover:scale-105 transition duration-300 text-white font-medium px-9 py-3 md:mb-22 rounded-lg">
+                <button className="hidden lg:block bg-gradient-to-b from-[#0FA9E9] to-[#0786E2] hover:bg-blue-700 hover:scale-105 transition duration-300 text-white font-medium px-9 py-3 2xl:mb-16 rounded-lg">
                     Discover More
                 </button>
 

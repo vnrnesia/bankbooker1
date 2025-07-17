@@ -21,7 +21,6 @@ const ProductsDropdown: React.FC<ProductsDropdownProps> = ({ bannerOpen }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
-  // Mouse menüye girince kapanmayı engelle
   const handleMouseEnter = () => {
     if (closeTimeout.current) {
       clearTimeout(closeTimeout.current);
@@ -30,14 +29,12 @@ const ProductsDropdown: React.FC<ProductsDropdownProps> = ({ bannerOpen }) => {
     setIsOpen(true);
   };
 
-  // Mouse menüden çıkınca kapanma tetikle
   const handleMouseLeave = () => {
     closeTimeout.current = setTimeout(() => {
       setIsOpen(false);
-    }, 0); // Hemen kapanması için 0 ms, istersen biraz artırabilirsin
+    }, 0);
   };
 
-  // Menü dışına tıklayınca menüyü kapat
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
@@ -56,7 +53,6 @@ const ProductsDropdown: React.FC<ProductsDropdownProps> = ({ bannerOpen }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
-  // Başlık bölümü için küçük helper component
   const SectionHeader = ({ title }: { title: string }) => (
     <div className="flex items-center justify-between my-4">
       <span className="text-lg font-medium">{title}</span>
@@ -100,27 +96,24 @@ const ProductsDropdown: React.FC<ProductsDropdownProps> = ({ bannerOpen }) => {
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop to capture outside clicks */}
             <div className="fixed inset-0 z-30" aria-hidden="true" />
 
-            {/* Dropdown menü animasyonlu */}
             <motion.div
               ref={dropdownRef}
               className={`fixed left-0 w-screen ${
                 bannerOpen ? "top-[80px]" : "top-[86px]"
-              } bg-white shadow-lg rounded p-6 z-40 overflow-y-auto`}
+              } bg-white shadow-lg rounded p-6 z-40`}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
-              style={{ maxHeight: "24rem" }}
               variants={dropdownVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
               transition={{ duration: 0.25, ease: "easeInOut" }}
             >
-              <div className="mx-auto max-w-10/12 grid grid-cols-4 gap-8">
+              <div className="mx-auto w-full max-w-10/12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {/* Products Column */}
-                <div className="col-span-1">
+                <div>
                   <SectionHeader title="Products" />
                   <Divider />
                   {[
@@ -162,8 +155,8 @@ const ProductsDropdown: React.FC<ProductsDropdownProps> = ({ bannerOpen }) => {
                 </div>
 
                 {/* Connect with Bankbooker Column */}
-                <div className="col-span-1">
-                  <SectionHeader title="Connect with Bankbooker" />
+                <div>
+                  <SectionHeader title="Connect Bankbooker" />
                   <Divider />
                   {[
                     {
@@ -203,7 +196,7 @@ const ProductsDropdown: React.FC<ProductsDropdownProps> = ({ bannerOpen }) => {
                 </div>
 
                 {/* Resource Center Column */}
-                <div className="col-span-1">
+                <div>
                   <SectionHeader title="Resource Center" />
                   <Divider />
                   {[
@@ -242,11 +235,9 @@ const ProductsDropdown: React.FC<ProductsDropdownProps> = ({ bannerOpen }) => {
                 </div>
 
                 {/* Best Offer Column */}
-                <div className="col-span-1 bg-gray-100 h-full rounded-lg py-0 px-2">
-                  <div className="flex justify-center mb-2 mt-4">
-                    <div className="text-lg font-medium text-center">
-                      Best Offer
-                    </div>
+                <div className="bg-gray-100 rounded-lg py-4 px-2 flex justify-center items-center">
+                  <div className="text-lg font-medium text-center">
+                    Best Offer
                   </div>
                 </div>
               </div>
