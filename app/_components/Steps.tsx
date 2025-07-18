@@ -59,7 +59,7 @@ export default function Steps() {
                 <div className="w-full md:w-1/2">
                     <Image
                         src={step.image}
-                       
+                        alt="resim"
                         width={600}
                         height={600}
                         className="w-full h-auto rounded-2xl shadow-md object-contain"
