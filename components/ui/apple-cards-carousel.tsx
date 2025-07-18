@@ -206,7 +206,7 @@ export const BlurImage = ({
   const [isLoading, setLoading] = useState(true);
   return (
     <Image
-      draggable={false} // 👈 Resmin sürüklenmesini engeller
+      draggable={false} 
       className={cn(
         "h-full w-full transition duration-300",
         isLoading ? "blur-sm" : "blur-0",
